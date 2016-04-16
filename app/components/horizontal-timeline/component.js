@@ -1,0 +1,1 @@
+export { default } from 'horizontal-timeline/components/horizontal-timeline/component';
