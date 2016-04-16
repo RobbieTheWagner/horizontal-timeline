@@ -5,6 +5,7 @@ const Rectangle = Object.extend({
   x: null,
   y: null,
   height: null,
+  text: null,
   width: null,
   intersects(rect) {
     if (rect.x < this.x + this.width && this.x < rect.x + rect.width && rect.y < this.y + this.height) {
@@ -82,14 +83,25 @@ export default Component.extend({
         x,
         y: 0,
         height: this.get('rectangleHeight'),
+        text: person.name,
         width
       });
       this.checkForIntersection(newRectangle);
       this.get('rectangles').push(newRectangle);
     });
     this.get('rectangles').forEach((rect) => {
-      ctx.rect(rect.x, rect.y, rect.width, rect.height);
-      ctx.stroke();
+      ctx.beginPath();
+      ctx.fillStyle="#6FC6F7";
+      ctx.strokeStyle="#000000";
+      ctx.strokeWidth = 2;
+      ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+      ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+      ctx.closePath();
+      ctx.fillStyle="#000000";
+      const textWidth = ctx.measureText(rect.text).width;
+      const textHeight = ctx.measureText('w').width;
+      const textX = rect.x + textWidth / 2;
+      ctx.fillText(rect.text, textX, rect.y + (textHeight / 2));
     })
   },
   checkForIntersection(newRectangle) {
