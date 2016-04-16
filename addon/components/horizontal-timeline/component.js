@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const {$, Component, computed, Object} = Ember;
+const {Component, computed, Object} = Ember;
 
 const Rectangle = Object.extend({
   x: null,
